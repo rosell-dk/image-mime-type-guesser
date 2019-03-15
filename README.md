@@ -2,6 +2,7 @@
 *Detect / guess mime type of an image*
 
 Do you need to determine if a file is an image? And perhaps you also want to know the mime type of the image?
+
 Do you basically want something like `exif_imagetype`, but which also works when PHP is compiled without exif?
 
 &ndash; You come to the right library.
