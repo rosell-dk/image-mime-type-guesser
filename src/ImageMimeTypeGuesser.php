@@ -9,7 +9,7 @@
 
 namespace ImageMimeTypeGuesser;
 
-use \ImageMimeType\Detectors\Stack;
+use \ImageMimeTypeGuesser\Detectors\Stack;
 
 class ImageMimeTypeGuesser
 {
@@ -22,9 +22,9 @@ class ImageMimeTypeGuesser
      *  - null  (if it cannot be determined)
      *  - false (if it can be determined that this is not an image)
      *  - mime  (if it is in fact an image, and type could be determined)
-     *  @return  mime | null | false.
+     *  @return  mime type | null | false.
      */
-    public static function detectMimeTypeImage($filePath)
+    public static function detect($filePath)
     {
         // Result of the discussion here:
         // https://github.com/rosell-dk/webp-convert/issues/98
@@ -33,51 +33,23 @@ class ImageMimeTypeGuesser
     }
 
     /**
-     *  Make a wild guess based on file extension
-     *  - and I mean wild!
+     *  Try to detect mime type of image using "stack" detector (all available methods, until one succeeds)
+     *  If that fails, fall back to wild west guessing based solely on file extension, which always has an answer
+     *  (this method never returns null)
      *
-     *  Only most popular image types are recognized.
-     *  Many are not. See this list: https://www.iana.org/assignments/media-types/media-types.xhtml
-     *                - and the constants here: https://secure.php.net/manual/en/function.exif-imagetype.php
-     *  TODO: jp2, jpx, ...
+     *  returns:
+     *  - false (if it can be determined that this is not an image)
+     *  - mime  (if it is in fact an image, and type could be determined)
+     *  @return  mime type | false.
      */
-    public static function guessMimeTypeFromExtension($filePath)
+    public static function guess($filePath)
     {
-        $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
-        $fileExtension = strtolower($fileExtension);
-
-        switch ($fileExtension) {
-            case 'bmp':
-            case 'gif':
-            case 'jpeg':
-            case 'png':
-            case 'tiff':
-            case 'webp':
-                return 'image/' . $fileExtension;
-
-            case 'ico':
-                return 'image/vnd.microsoft.icon';      // or perhaps 'x-icon' ?
-
-            case 'jpg':
-                return 'image/jpeg';
-
-            case 'svg':
-                return 'image/svg+xml';
-
-            case 'tif':
-                return 'image/tiff';
-        }
-        return false;
-    }
-
-    public static function guessMimeTypeImage($filePath)
-    {
-        $detectionResult = self::detectMimeTypeImage($filePath);
+        $detectionResult = self::detect($filePath);
         if (!is_null($detectionResult)) {
             return $detectionResult;
         }
 
         // fall back to the wild west method
-        return self::guessMimeTypeFromExtension($filePath);
+        return GuessFromExtension::guessMimeTypeFromExtension($filePath);
     }
 }
