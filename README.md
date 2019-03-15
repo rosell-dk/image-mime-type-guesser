@@ -35,6 +35,8 @@ if (is_null($result)) {
 If you are ok with wild guessing from extension, use `ImageMimeTypeGuesser::guess`.
 It will either return the mime type of the image, or *false* if it is not an image.
 
+*Warning*: Only a limited set of image extensions is recognized by the extension to mimetype mapper - namely the following: { bmp, gif, ico, jpg, jpeg, png, tif, tiff, webp, svg }
+
 Example:
 ```php
 $result = ImageMimeTypeGuesser::guess($filePath);
