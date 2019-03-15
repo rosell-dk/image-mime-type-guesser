@@ -35,7 +35,7 @@ class BaseDetectorTester
         self::testDetectSingle('jpg-test.jpg', 'image/jpeg');
         self::testDetectSingle('png-test.png', 'image/png');
         self::testDetectSingle('tif-test.tif', 'image/tiff');
-        // self::testDetectSingle('webp-test.webp', 'image/webp');
+        // self::testDetectSingle('webp-test.webp', 'image/webp');      // Disabled webp test, as the image/webp mime type is not on travis...
 
         // special cases
         self::testDetectSingle('jpg-with space.jpg', 'image/jpeg');
