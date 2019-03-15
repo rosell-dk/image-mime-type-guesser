@@ -10,7 +10,7 @@ Do you basically want something like `exif_imagetype`, but which also works when
 
 &ndash; You come to the right library.
 
-This library uses `exif_imagetype` to determine the mime type. If it can be determined, it is returned. If it can be determined that it is not an image, it returns false. If nothing can be determined, it does the same thing, but this time using `getimagesize`. The pattern repeats through a whole stack of methods.
+This library uses `exif_imagetype` to determine the mime type. If it can be determined, it is returned. If it can be determined that it is not an image, it returns false. If nothing can be determined, it does the same thing, but this time using `getimagesize`. And then using `finfo`, and finally using `mime_content_type`.
 
 
 ## Installation
