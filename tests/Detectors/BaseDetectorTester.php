@@ -19,7 +19,7 @@ class BaseDetectorTester
             self::$currentTestInstance->assertEquals(true, true);
         } else {
             // we got either false or a mime type...
-            self::$currentTestInstance->assertEquals($result, $expectedResult);
+            self::$currentTestInstance->assertEquals($expectedResult, $result);
         }
 
     }
