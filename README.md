@@ -12,6 +12,8 @@ Do you basically want something like `exif_imagetype`, but which also works when
 
 This library uses `exif_imagetype` to determine the mime type. If it can be determined, it is returned. If it can be determined that it is not an image, it returns false. If nothing can be determined, it does the same thing, but this time using `getimagesize`. And then using `finfo`, and finally using `mime_content_type`.
 
+Note that these methods all uses the mime type mapping on the server. Not all servers for example detects `image/webp`.
+
 
 ## Installation
 
