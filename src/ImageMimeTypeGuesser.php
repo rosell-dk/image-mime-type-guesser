@@ -52,4 +52,15 @@ class ImageMimeTypeGuesser
         // fall back to the wild west method
         return GuessFromExtension::guessMimeTypeFromExtension($filePath);
     }
+
+
+    public static function guessIsIn($filePath, $mimeTypes)
+    {
+        return in_array(self::guess($filePath), $mimeTypes);
+    }
+
+    public static function detectIsIn($filePath, $mimeTypes)
+    {
+        return in_array(self::detect($filePath), $mimeTypes);
+    }
 }

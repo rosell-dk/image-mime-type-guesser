@@ -46,13 +46,12 @@ if ($result !== false) {
 }
 ```
 
-**TODO:**
 For convenience, you can use the following to test against allowed types, using `ImageMimeTypeGuesser::detectIsIn` and `ImageMimeTypeGuesser::guessIsIn`
 
 Example:
 
 ```php
-if (ImageMimeTypeGuesser::guessIsIn(['image/jpeg','image/png']) {
+if (ImageMimeTypeGuesser::guessIsIn($filePath, ['image/jpeg','image/png']) {
     // Image is either a jpeg or a png (probably)
 }
 ```
