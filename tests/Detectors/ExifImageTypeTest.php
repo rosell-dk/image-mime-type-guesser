@@ -12,4 +12,12 @@ class ExifImageTypeTest extends TestCase
     {
         BaseDetectorTester::testDetect($this, 'ExifImageType');
     }
+
+    public function testWebP()
+    {
+        if (function_exists('image_type_to_mime_type')) {
+            $this->assertEquals(18, IMAGETYPE_WEBP);
+        }
+        $this->assertEquals('image/webp', image_type_to_mime_type(IMAGETYPE_WEBP));
+    }
 }
