@@ -50,5 +50,4 @@ class GuessFromExtension
         }
         return false;
     }
-
 }
