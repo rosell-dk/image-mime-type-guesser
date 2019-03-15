@@ -1,4 +1,7 @@
 # image-mime-type-guesser
+
+[![Build Status](https://travis-ci.org/rosell-dk/image-mime-type-guesser.png?branch=master)](https://travis-ci.org/rosell-dk/image-mime-type-guesser)
+
 *Detect / guess mime type of an image*
 
 Do you need to determine if a file is an image? And perhaps you also want to know the mime type of the image?
