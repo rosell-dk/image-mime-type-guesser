@@ -15,7 +15,7 @@
     ],
     "cs-fix": "php-cs-fixer fix",
     "cs-dry": "php-cs-fixer fix --dry-run --diff",
-    "test": "phpunit",
+    "test": "phpunit tests",
     "phpcs": "phpcs --standard=PSR2",
     "phpcs-all": "phpcs --standard=PSR2 src",
     "phpcbf": "phpcbf --standard=PSR2"
