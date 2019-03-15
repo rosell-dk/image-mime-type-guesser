@@ -30,7 +30,7 @@ $result = ImageMimeTypeGuesser::detect($filePath);
 if (is_null($result)) {
     // the mime type could not be determined
 } elseif ($result === false) {
-    // it is NOT an image
+    // it is NOT an image (not a mime type that the server knows about anyway)
 } else {
     // it is an image, and we know its mime type - for sure!
     $mimeType = $result;
@@ -38,7 +38,9 @@ if (is_null($result)) {
 ```
 
 If you are ok with wild guessing from extension, use `ImageMimeTypeGuesser::guess`.
-It will either return the mime type of the image, or *false* if it is not an image.
+It will first try detection. If detection fails, it will fall back to guessing from extension using `GuessFromExtension::guess`.
+
+So it will always has an answer. It will either return the mime type of the image, or *false* if it is not an image.
 
 *Warning*: Only a limited set of image extensions is recognized by the extension to mimetype mapper - namely the following: { bmp, gif, ico, jpg, jpeg, png, tif, tiff, webp, svg }. If you need some other specifically, feel free to add a PR, or ask me to do it by creating an issue.
 
@@ -53,7 +55,31 @@ if ($result !== false) {
 }
 ```
 
-For convenience, you can use the following to test against allowed types, using `ImageMimeTypeGuesser::detectIsIn` and `ImageMimeTypeGuesser::guessIsIn`
+If you are not ok with that a server might not recognize ie a webp due to that it does not know of the mime type, use `ImageMimeTypeGuesser::lenientGuess`
+Provided that the webp has the "webp" file extension, it will return 'image/webp', even though the `detect` method claims that it is not an image (by returning false). But it will first try the `detect` method.
+
+The logic is most easily described with the code itself:
+
+```php
+public static function lenientGuess($filePath)
+{
+    $detectResult = self::detect($filePath);
+    if ($detectResult === false) {
+        // The server does not recognize this image type.
+        // - but perhaps it is because it does not know about this image type.
+        // - so we turn to mapping the file extension
+        return GuessFromExtension::guess($filePath);
+    } elseif (is_null($detectResult)) {
+        // the mime type could not be determined
+        // perhaps we also in this case want to turn to mapping the file extension
+        return GuessFromExtension::guess($filePath);
+    }
+    return $detectResult;
+}
+```
+
+
+Finally, for convenience, there are three methods for testing if a detection / guess / lenient guess is in a list of mime types. They are called `ImageMimeTypeGuesser::detectIsIn`, `ImageMimeTypeGuesser::guessIsIn` and `ImageMimeTypeGuesser::lenientGuessIsIn`.
 
 Example:
 

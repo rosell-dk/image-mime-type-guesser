@@ -20,7 +20,7 @@ class ImageMimeTypeGuesser
      *
      *  returns:
      *  - null  (if it cannot be determined)
-     *  - false (if it can be determined that this is not an image)
+     *  - false (if it is not an image that the server knows about)
      *  - mime  (if it is in fact an image, and type could be determined)
      *  @return  mime type | null | false.
      */
@@ -38,8 +38,8 @@ class ImageMimeTypeGuesser
      *  (this method never returns null)
      *
      *  returns:
-     *  - false (if it can be determined that this is not an image)
-     *  - mime  (if it is in fact an image, and type could be determined)
+     *  - false (if it is not an image that the server knows about)
+     *  - mime  (if it looks like an image)
      *  @return  mime type | false.
      */
     public static function guess($filePath)
@@ -50,8 +50,36 @@ class ImageMimeTypeGuesser
         }
 
         // fall back to the wild west method
-        return GuessFromExtension::guessMimeTypeFromExtension($filePath);
+        return GuessFromExtension::guess($filePath);
     }
+
+    /**
+     *  Try to detect mime type of image using "stack" detector (all available methods, until one succeeds)
+     *  But do not take no for an answer, as "no", really only means that the server has not registred that mime type
+     *
+     *  (this method never returns null)
+     *
+     *  returns:
+     *  - false (if it can be determined that this is not an image)
+     *  - mime  (if it looks like an image)
+     *  @return  mime type | false.
+     */
+    public static function lenientGuess($filePath)
+    {
+        $detectResult = self::detect($filePath);
+        if ($detectResult === false) {
+            // The server does not recognize this image type.
+            // - but perhaps it is because it does not know about this image type.
+            // - so we turn to mapping the file extension
+            return GuessFromExtension::guess($filePath);
+        } elseif (is_null($detectResult)) {
+            // the mime type could not be determined
+            // perhaps we also in this case want to turn to mapping the file extension
+            return GuessFromExtension::guess($filePath);
+        }
+        return $detectResult;
+    }
+
 
 
     public static function guessIsIn($filePath, $mimeTypes)
@@ -62,5 +90,10 @@ class ImageMimeTypeGuesser
     public static function detectIsIn($filePath, $mimeTypes)
     {
         return in_array(self::detect($filePath), $mimeTypes);
+    }
+
+    public static function lenientGuessIsIn($filePath, $mimeTypes)
+    {
+        return in_array(self::lenientGuess($filePath), $mimeTypes);
     }
 }

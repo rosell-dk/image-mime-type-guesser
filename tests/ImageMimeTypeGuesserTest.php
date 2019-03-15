@@ -76,5 +76,19 @@ class ImageMimeTypeGuesserTest extends TestCase
         doGuessIsInTest('gif-test.gif', ['image/jpeg'], false);
     }
 
+    public function testLenientGuessIsIn()
+    {
+        global $thisTest;
+        $thisTest = $this;
+
+        function doLenientGuessIsInTest($fileName, $mimeArray, $expectedResult) {
+            global $thisTest;
+            $result = ImageMimeTypeGuesser::guessIsIn(__DIR__ . '/images/' . $fileName, $mimeArray);
+            $thisTest->assertEquals($expectedResult, $result);
+        }
+
+        doLenientGuessIsInTest('webp-test.webp', ['image/webp'], true);
+    }
+
 
 }
