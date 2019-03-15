@@ -1,4 +1,4 @@
-# image-mime-type
+# image-mime-type-guesser
 Detect / guess mime type of an image
 
 This library is for you, if you need to determine if a file is of a given mime-type.
