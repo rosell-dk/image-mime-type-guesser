@@ -6,13 +6,17 @@ class GetImageSize extends AbstractDetector
 {
 
     /**
-     *  Try to detect mime type of image using "getimagesize"
+     * Try to detect mime type of image using *getimagesize()*
      *
-     *  Like all detectors, it returns:
-     *  - null  (if it cannot be determined)
-     *  - false (if it can be determined that this is not an image)
-     *  - mime  (if it is in fact an image, and type could be determined)
-     *  @return  mime | null | false.
+     * Returns:
+     * - mime type (string) (if it is in fact an image, and type could be determined)
+     * - false (if it can be determined that this is not an image)
+     * - void  (if nothing can be determined)
+     *
+     * @param  string  $filePath  The path to the file
+     * @return string|void|false  mimetype (if it is an image, and type could be determined),
+     *    false (if it can be determined that this is not an image)
+     *    or void (if nothing can be determined)
      */
     protected function doDetect($filePath)
     {
