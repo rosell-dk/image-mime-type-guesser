@@ -1,6 +1,8 @@
 # image-mime-type-guesser
 
 [![Build Status](https://travis-ci.org/rosell-dk/image-mime-type-guesser.png?branch=master)](https://travis-ci.org/rosell-dk/image-mime-type-guesser)
+[![Quality Score](https://scrutinizer-ci.com/g/rosell-dk/image-mime-type-guesser/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/rosell-dk/image-mime-type-guesser/)
+
 
 *Detect / guess mime type of an image*
 
