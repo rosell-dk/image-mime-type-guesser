@@ -83,7 +83,7 @@ class ImageMimeTypeGuesserTest extends TestCase
 
         function doLenientGuessIsInTest($fileName, $mimeArray, $expectedResult) {
             global $thisTest;
-            $result = ImageMimeTypeGuesser::guessIsIn(__DIR__ . '/images/' . $fileName, $mimeArray);
+            $result = ImageMimeTypeGuesser::lenientGuessIsIn(__DIR__ . '/images/' . $fileName, $mimeArray);
             $thisTest->assertEquals($expectedResult, $result);
         }
 
