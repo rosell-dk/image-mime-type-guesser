@@ -28,8 +28,6 @@ class FInfo extends AbstractDetector
             } else {
                 return false;
             }
-
-            return $type;
         }
     }
 }
