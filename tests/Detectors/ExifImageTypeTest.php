@@ -1,16 +1,16 @@
 <?php
 namespace Tests\ImageMimeTypeGuesser\Detectors;
 
-use \Tests\ImageMimeTypeGuesser\Detectors\BaseDetectorTester;
+use \Tests\ImageMimeTypeGuesser\Detectors\AbstractDetectorTester;
 use \PHPUnit\Framework\TestCase;
 
-include_once 'BaseDetectorTester.php';  // Not autoloaded, because it does not end with "Test"
+include_once 'AbstractDetectorTester.php';  // Not autoloaded, because it does not end with "Test"
 
 class ExifImageTypeTest extends TestCase
 {
     public function testDoDetect()
     {
-        BaseDetectorTester::testDetect($this, 'ExifImageType');
+        AbstractDetectorTester::testDetect($this, 'ExifImageType');
     }
 
     public function testWebP()

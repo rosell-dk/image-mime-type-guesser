@@ -2,9 +2,9 @@
 
 namespace ImageMimeTypeGuesser\Detectors;
 
-use \ImageMimeTypeGuesser\Detectors\BaseDetector;
+use \ImageMimeTypeGuesser\Detectors\AbstractDetector;
 
-class ExifImageType extends BaseDetector
+class ExifImageType extends AbstractDetector
 {
 
     /**
@@ -16,7 +16,7 @@ class ExifImageType extends BaseDetector
      *  - mime  (if it is in fact an image, and type could be determined)
      *  @return  mime | null | false.
      */
-    public function doDetect($filePath)
+    protected function doDetect($filePath)
     {
         // exif_imagetype is fast, however not available on all systems,
         // It may return false. In that case we can rely on that the file is not an image (and return false)

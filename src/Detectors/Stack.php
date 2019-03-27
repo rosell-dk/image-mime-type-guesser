@@ -2,7 +2,7 @@
 
 namespace ImageMimeTypeGuesser\Detectors;
 
-class Stack extends BaseDetector
+class Stack extends AbstractDetector
 {
 
     /**
@@ -13,7 +13,7 @@ class Stack extends BaseDetector
      *  - mime  (if it is in fact an image, and type could be determined)
      *  @return  mime | null | false.
      */
-    public function doDetect($filePath)
+    protected function doDetect($filePath)
     {
         $detectors = [
             'ExifImageType',

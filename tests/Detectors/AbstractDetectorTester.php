@@ -1,7 +1,7 @@
 <?php
 namespace Tests\ImageMimeTypeGuesser\Detectors;
 
-class BaseDetectorTester
+class AbstractDetectorTester
 {
     private static $currentTestInstance;
     private static $currentDetectorClassName;

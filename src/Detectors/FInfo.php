@@ -2,7 +2,7 @@
 
 namespace ImageMimeTypeGuesser\Detectors;
 
-class FInfo extends BaseDetector
+class FInfo extends AbstractDetector
 {
 
     /**
@@ -14,7 +14,7 @@ class FInfo extends BaseDetector
      *  - mime  (if it is in fact an image, and type could be determined)
      *  @return  mime | null | false.
      */
-    public function doDetect($filePath)
+    protected function doDetect($filePath)
     {
 
         if (class_exists('finfo')) {

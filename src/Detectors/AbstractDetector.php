@@ -2,8 +2,10 @@
 
 namespace ImageMimeTypeGuesser\Detectors;
 
-class BaseDetector
+abstract class AbstractDetector
 {
+
+    abstract protected function doDetect($filePath);
 
     public static function createInstance()
     {

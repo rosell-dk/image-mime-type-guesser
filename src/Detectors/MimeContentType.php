@@ -2,7 +2,7 @@
 
 namespace ImageMimeTypeGuesser\Detectors;
 
-class MimeContentType extends BaseDetector
+class MimeContentType extends AbstractDetector
 {
 
     /**
@@ -14,7 +14,7 @@ class MimeContentType extends BaseDetector
      *  - mime  (if it is in fact an image, and type could be determined)
      *  @return  mime | null | false.
      */
-    public function doDetect($filePath)
+    protected function doDetect($filePath)
     {
         // mime_content_type supposedly used to be deprecated, but it seems it isn't anymore
         // it may return false on failure.

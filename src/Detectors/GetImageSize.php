@@ -2,7 +2,7 @@
 
 namespace ImageMimeTypeGuesser\Detectors;
 
-class GetImageSize extends BaseDetector
+class GetImageSize extends AbstractDetector
 {
 
     /**
@@ -14,7 +14,7 @@ class GetImageSize extends BaseDetector
      *  - mime  (if it is in fact an image, and type could be determined)
      *  @return  mime | null | false.
      */
-    public function doDetect($filePath)
+    protected function doDetect($filePath)
     {
         // getimagesize is slower than exif_imagetype
         // It may not return "mime". In that case we can rely on that the file is not an image (and return false)
