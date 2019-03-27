@@ -20,6 +20,9 @@ class GuessFromExtension
      *  Only most popular image types are recognized.
      *  Many are not. See this list: https://www.iana.org/assignments/media-types/media-types.xhtml
      *                - and the constants here: https://secure.php.net/manual/en/function.exif-imagetype.php
+     *
+     *  If no mapping found, false is returned
+     *
      *  TODO: jp2, jpx, ...
      */
     public static function guess($filePath)
