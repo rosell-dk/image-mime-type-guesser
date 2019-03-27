@@ -16,13 +16,17 @@ class ImageMimeTypeGuesser
 
 
     /**
-     *  Try to detect mime type of image using "stack" detector (all available methods, until one succeeds)
+     * Try to detect mime type of image using all available detectors (the "stack" detector)
      *
-     *  returns:
-     *  - null  (if it cannot be determined)
-     *  - false (if it is not an image that the server knows about)
-     *  - mime  (if it is in fact an image, and type could be determined)
-     *  @return  mime type | null | false.
+     * Returns:
+     * - mime type (string) (if it is in fact an image, and type could be determined)
+     * - false (if it can be determined that this is not an image)
+     * - void  (if nothing can be determined)
+     *
+     * @param  string  $filePath  The path to the file
+     * @return string|false|void  mimetype (if it is an image, and type could be determined),
+     *    false (if it can be determined that this is not an image)
+     *    or void (if nothing can be determined)
      */
     public static function detect($filePath)
     {

@@ -14,7 +14,7 @@ class FInfo extends AbstractDetector
      * - void  (if nothing can be determined)
      *
      * @param  string  $filePath  The path to the file
-     * @return string|void|false  mimetype (if it is an image, and type could be determined),
+     * @return string|false|void  mimetype (if it is an image, and type could be determined),
      *    false (if it can be determined that this is not an image)
      *    or void (if nothing can be determined)
      */
