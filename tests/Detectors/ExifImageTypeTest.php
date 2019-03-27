@@ -13,6 +13,20 @@ class ExifImageTypeTest extends TestCase
         AbstractDetectorTester::testDetect($this, 'ExifImageType');
     }
 
+    public function testImplicitAssumptionsAboutExistingFunctions()
+    {
+        // The code implicitly assumes that if 'exif_imagetype()' exists, then 'image_type_to_mime_type()' does too.
+        // Make that assumption explicit.
+        if (function_exists('exif_imagetype')) {
+            $this->assertTrue(function_exists('image_type_to_mime_type'), 'implicit assumption that image_type_to_mime_type() exists on all systems where exif_imagetype() exists does not hold!');
+        }
+    }
+
+    /*
+    This test can fail! (it does on Travis, in 5.6 and 7.0, but not on 7.1 and 7.2)
+    - This means that just because 'image_type_to_mime_type' exists, it does not neccesarily mean that
+      IMAGETYPE_WEBP constant is defined
+
     public function testWebP()
     {
         if (function_exists('image_type_to_mime_type')) {
@@ -20,4 +34,5 @@ class ExifImageTypeTest extends TestCase
             $this->assertEquals('image/webp', image_type_to_mime_type(IMAGETYPE_WEBP));
         }
     }
+    */
 }
