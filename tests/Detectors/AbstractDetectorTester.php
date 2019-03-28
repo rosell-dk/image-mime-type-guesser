@@ -14,8 +14,8 @@ class AbstractDetectorTester
 
         if (is_null($result)) {
             // the detector could not detect. That is ok.
-            echo 'Warning: ' . self::$currentDetectorClassName . ' could not detect that: ' .
-            $fileName . ' should result in ' . ($expectedResult === false ? 'false' : $expectedResult) . "\n";
+            echo 'Notice: ' . self::$currentDetectorClassName . ' could not detect that: ' .
+            $fileName . ' ' . ($expectedResult === false ? 'is not an image' : 'should result in' . $expectedResult) . "\n";
             self::$currentTestInstance->assertEquals(true, true);
         } else {
             // we got either false or a mime type...
