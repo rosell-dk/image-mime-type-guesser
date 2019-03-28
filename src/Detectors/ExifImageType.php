@@ -35,6 +35,6 @@ class ExifImageType extends AbstractDetector
 //                throw($e);
             }
         }
-        return;
+        return null;
     }
 }

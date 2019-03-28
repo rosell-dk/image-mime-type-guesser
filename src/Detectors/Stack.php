@@ -37,6 +37,6 @@ class Stack extends AbstractDetector
             }
         }
 
-        return;     // undetermined
+        return null;     // undetermined
     }
 }

@@ -34,11 +34,11 @@ class SniffFirstFourBytes extends AbstractDetector
 
         $handle = @fopen($filePath, 'r');
         if ($handle === false) {
-            return;
+            return null;
         }
         $firstFour = @fread($handle, 4);
         if ($firstFour === false) {
-            return;
+            return null;
         }
         $key = strtoupper(bin2hex($firstFour));
         if (isset($known[$key])) {

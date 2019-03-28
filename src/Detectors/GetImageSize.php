@@ -30,5 +30,6 @@ class GetImageSize extends AbstractDetector
                 // well well, don't let this stop us either
             }
         }
+        return null;
     }
 }

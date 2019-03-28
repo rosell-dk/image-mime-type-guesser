@@ -36,5 +36,6 @@ class MimeContentType extends AbstractDetector
                 // we are unstoppable!
             }
         }
+        return null;
     }
 }
