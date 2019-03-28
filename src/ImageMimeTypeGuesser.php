@@ -3,6 +3,9 @@
 /**
  * ImageMimeTypeGuesser - Detect / guess mime type of an image
  *
+ * The library is born out of a discussion here:
+ * https://github.com/rosell-dk/webp-convert/issues/98
+ *
  * @link https://github.com/rosell-dk/image-mime-type-guesser
  * @license MIT
  */
@@ -16,35 +19,38 @@ class ImageMimeTypeGuesser
 
 
     /**
-     * Try to detect mime type of image using all available detectors (the "stack" detector)
+     * Try to detect mime type of image using all available detectors (the "stack" detector).
      *
      * Returns:
      * - mime type (string) (if it is in fact an image, and type could be determined)
-     * - false (if it can be determined that this is not an image)
+     * - false (if it is not an image type that the server knowns about)
      * - void  (if nothing can be determined)
      *
      * @param  string  $filePath  The path to the file
      * @return string|false|void  mimetype (if it is an image, and type could be determined),
-     *    false (if it can be determined that this is not an image)
+     *    false (if it is not an image type that the server knowns about)
      *    or void (if nothing can be determined)
      */
     public static function detect($filePath)
     {
-        // Result of the discussion here:
-        // https://github.com/rosell-dk/webp-convert/issues/98
-
         return Stack::detect($filePath);
     }
 
     /**
-     *  Try to detect mime type of image using "stack" detector (all available methods, until one succeeds)
-     *  If that fails, fall back to wild west guessing based solely on file extension, which always has an answer
-     *  (this method never returns null)
+     * Try to detect mime type of image. If that fails, make a guess based on the file extension.
      *
-     *  returns:
-     *  - false (if it is not an image that the server knows about)
-     *  - mime  (if it looks like an image)
-     *  @return  mime type | false.
+     * Try to detect mime type of image using "stack" detector (all available methods, until one succeeds)
+     * If that fails (void), fall back to wild west guessing based solely on file extension.
+     *
+     * Returns:
+     * - mime type (string) (if it is an image, and type could be determined / mapped from file extension))
+     * - false (if it is not an image type that the server knowns about)
+     * - void  (if nothing can be determined)
+     *
+     * @param  string  $filePath  The path to the file
+     * @return string|false|void  mimetype (if it is an image, and type could be determined),
+     *    false (if it is not an image type that the server knowns about)
+     *    or void (if nothing can be determined)
      */
     public static function guess($filePath)
     {
@@ -58,15 +64,20 @@ class ImageMimeTypeGuesser
     }
 
     /**
-     *  Try to detect mime type of image using "stack" detector (all available methods, until one succeeds)
-     *  But do not take no for an answer, as "no", really only means that the server has not registred that mime type
+     * Try to detect mime type of image. If that fails, make a guess based on the file extension.
      *
-     *  (this method never returns null)
+     * Try to detect mime type of image using "stack" detector (all available methods, until one succeeds)
+     * If that fails (false or void), fall back to wild west guessing based solely on file extension.
      *
-     *  returns:
-     *  - false (if it can be determined that this is not an image)
-     *  - mime  (if it looks like an image)
-     *  @return  mime type | false.
+     * Returns:
+     * - mime type (string) (if it is an image, and type could be determined / mapped from file extension)
+     * - false (if it is not an image type that the server knowns about)
+     * - void  (if nothing can be determined)
+     *
+     * @param  string  $filePath  The path to the file
+     * @return string|false|void  mimetype (if it is an image, and type could be determined / mapped from file extension),
+     *    false (if it is not an image type that the server knowns about)
+     *    or void (if nothing can be determined)
      */
     public static function lenientGuess($filePath)
     {
@@ -85,17 +96,37 @@ class ImageMimeTypeGuesser
     }
 
 
-
-    public static function guessIsIn($filePath, $mimeTypes)
-    {
-        return in_array(self::guess($filePath), $mimeTypes);
-    }
-
+    /**
+     * Check if the *detected* mime type is in a list of accepted mime types.
+     *
+     * @param  string  $filePath  The path to the file
+     * @param  string[]  $mimeTypes  Mime types to accept
+     * @return bool  Whether the detected mime type is in the $mimeTypes array or not
+     */
     public static function detectIsIn($filePath, $mimeTypes)
     {
         return in_array(self::detect($filePath), $mimeTypes);
     }
 
+    /**
+     * Check if the *guessed* mime type is in a list of accepted mime types.
+     *
+     * @param  string  $filePath  The path to the file
+     * @param  string[]  $mimeTypes  Mime types to accept
+     * @return bool  Whether the detected / guessed mime type is in the $mimeTypes array or not
+     */
+    public static function guessIsIn($filePath, $mimeTypes)
+    {
+        return in_array(self::guess($filePath), $mimeTypes);
+    }
+
+    /**
+     * Check if the *leniently guessed* mime type is in a list of accepted mime types.
+     *
+     * @param  string  $filePath  The path to the file
+     * @param  string[]  $mimeTypes  Mime types to accept
+     * @return bool  Whether the detected / leniently guessed mime type is in the $mimeTypes array or not
+     */
     public static function lenientGuessIsIn($filePath, $mimeTypes)
     {
         return in_array(self::lenientGuess($filePath), $mimeTypes);
