@@ -21,9 +21,10 @@ class Stack extends AbstractDetector
     {
         $detectors = [
             'ExifImageType',
-            'GetImageSize',
             'FInfo',
-            'MimeContentType'
+            'SniffFirstFourBytes',
+            'GetImageSize',
+            'MimeContentType',
         ];
 
         foreach ($detectors as $className) {

@@ -16,8 +16,9 @@ Ok, actually the library cannot offer mime type detection for images which works
 
 The stack of methods are currently (and in that order):
 -  [`exif_imagetype`](https://www.php.net/manual/en/function.exif-imagetype.php) *(PHP 4 >= 4.3.0, PHP 5, PHP 7) - unless PHP is compiled without exif*
--  [`getimagesize`](https://www.php.net/getimagesize) *(PHP 4, PHP 5, PHP 7)*
 -  [`finfo`](https://www.php.net/manual/en/class.finfo.php) *(PHP 5 >= 5.3.0, PHP 7, PECL fileinfo >= 0.1.0) - requires fileinfo extension to be enabled*
+-  Our custom 4 byte sniffer (based on [this](http://phil.lavin.me.uk/2011/12/php-accurately-detecting-the-type-of-a-file/)) *(PHP 4, PHP 5, PHP 7) - only detects png, gif and jpeg*
+-  [`getimagesize`](https://www.php.net/getimagesize) *(PHP 4, PHP 5, PHP 7)*
 -  [`mime_content_type`](https://www.php.net/manual/en/function.mime-content-type.php) *(PHP 4 >= 4.3.0, PHP 5, PHP 7)*
 
 Note that these methods all uses the mime type mapping on the server. Not all servers for example detects `image/webp`.
