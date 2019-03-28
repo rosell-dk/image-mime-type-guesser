@@ -16,6 +16,7 @@
     "cs-fix": "php-cs-fixer fix",
     "cs-dry": "php-cs-fixer fix --dry-run --diff",
     "test": "phpunit tests",
+    "test-with-coverage": "phpunit tests --coverage-text --coverage-clover=coverage.clover",
     "phpcs": "phpcs --standard=PSR2",
     "phpcs-all": "phpcs --standard=PSR2 src",
     "phpcbf": "phpcbf --standard=PSR2"
