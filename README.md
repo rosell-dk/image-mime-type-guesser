@@ -8,11 +8,17 @@
 
 Do you need to determine if a file is an image? And perhaps you also want to know the mime type of the image?
 
-Do you basically want something like `exif_imagetype`, but which also works when PHP is compiled without exif?
+Do you basically need [exif_imagetype](https://www.php.net/manual/en/function.exif-imagetype.php)], but which also works when PHP is compiled without exif?
 
 &ndash; You come to the right library.
 
-This library uses `exif_imagetype` to determine the mime type. If it can be determined, it is returned. If it can be determined that it is not an image, it returns false. If nothing can be determined, it does the same thing, but this time using `getimagesize`. And then using `finfo`, and finally using `mime_content_type`.
+Ok, actually the library cannot offer mime type detection for images which works *on all platforms*, but it can try a whole stack of methods and optionally fall back to guess from the file extension.
+
+The stack of methods are currently (and in that order):
+-  [`exif_imagetype`](https://www.php.net/manual/en/function.exif-imagetype.php) *(PHP 4 >= 4.3.0, PHP 5, PHP 7) - unless PHP is compiled without exif*
+-  [`getimagesize`](https://www.php.net/getimagesize) *(PHP 4, PHP 5, PHP 7)*
+-  [`finfo`](https://www.php.net/manual/en/class.finfo.php) *(PHP 5 >= 5.3.0, PHP 7, PECL fileinfo >= 0.1.0) - requires fileinfo extension to be enabled*
+-  [`mime_content_type`](https://www.php.net/manual/en/function.mime-content-type.php) *(PHP 4 >= 4.3.0, PHP 5, PHP 7)*
 
 Note that these methods all uses the mime type mapping on the server. Not all servers for example detects `image/webp`.
 
@@ -34,17 +40,21 @@ if (is_null($result)) {
 } elseif ($result === false) {
     // it is NOT an image (not a mime type that the server knows about anyway)
 } else {
-    // it is an image, and we know its mime type - for sure!
+    // it is an image, and we know its mime type!
     $mimeType = $result;
 }
 ```
 
-If you are ok with wild guessing from extension, use `ImageMimeTypeGuesser::guess`.
-It will first try detection. If detection fails, it will fall back to guessing from extension using `GuessFromExtension::guess`.
+If you are ok with wild guessing from file extension, use `ImageMimeTypeGuesser::guess`.
 
-So it will always has an answer. It will either return the mime type of the image, or *false* if it is not an image.
+It will first try detection. If detection fails (void is returned), it will fall back to guessing from extension using `GuessFromExtension::guess`.
 
-*Warning*: Only a limited set of image extensions is recognized by the extension to mimetype mapper - namely the following: { bmp, gif, ico, jpg, jpeg, png, tif, tiff, webp, svg }. If you need some other specifically, feel free to add a PR, or ask me to do it by creating an issue.
+As with the detect method, it also has three possible outcomes: a mime type, false or void.
+
+*Warning*: Beware that guessing from file extension is unsuited when your aim is to protect the server from harmful uploads.
+
+*Notice*: Only a limited set of image extensions is recognized by the extension to mimetype mapper - namely the following: { bmp, gif, ico, jpg, jpeg, png, tif, tiff, webp, svg }. If you need some other specifically, feel free to add a PR, or ask me to do it by creating an issue.
+
 
 Example:
 ```php
@@ -57,10 +67,11 @@ if ($result !== false) {
 }
 ```
 
-If you are not ok with that a server might not recognize ie a webp due to that it does not know of the mime type, use `ImageMimeTypeGuesser::lenientGuess`
-Provided that the webp has the "webp" file extension, it will return 'image/webp', even though the `detect` method claims that it is not an image (by returning false). But it will first try the `detect` method.
+If you do not want your servers limited knowledge about image types to be decisive, you can use lenientGuess. It tries to detect. If detection fails (void *or false* is returned), it will fall back to guessing based on file extension.
 
-The logic is most easily described with the code itself:
+Say for example that your server does not recognize the image/webp format, and you are examining a file "test.webp". In that case, a detection with *detect* will return false (provided that one of the detection methods are operational). The *guess* method will *also* return false, as it never gets to fall back to file extension mapping. However, *lenientGuess* will nail it, and return 'image/webp'.
+
+For those who speaks code, the logic is perhaps best described with the code itself:
 
 ```php
 public static function lenientGuess($filePath)
