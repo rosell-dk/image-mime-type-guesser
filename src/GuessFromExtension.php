@@ -28,12 +28,12 @@ class GuessFromExtension
      * Returns:
      * - mimetype (if file extension could be mapped to an image type),
      * - false (if file extension could be mapped to a type known not to be an image type)
-     * - void (if file extension could not be mapped to any mime type, using our little list)
+     * - null (if file extension could not be mapped to any mime type, using our little list)
      *
      * @param  string  $filePath  The path to the file
-     * @return string|false|void  mimetype (if file extension could be mapped to an image type),
+     * @return string|false|null  mimetype (if file extension could be mapped to an image type),
      *    false (if file extension could be mapped to a type known not to be an image type)
-     *    or void (if file extension could not be mapped to any mime type, using our little list)
+     *    or null (if file extension could not be mapped to any mime type, using our little list)
      */
     public static function guess($filePath)
     {
