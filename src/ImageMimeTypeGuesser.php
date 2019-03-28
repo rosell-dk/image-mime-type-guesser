@@ -75,7 +75,7 @@ class ImageMimeTypeGuesser
      * - null  (if nothing can be determined)
      *
      * @param  string  $filePath  The path to the file
-     * @return string|false|null  mimetype (if it is an image, and type could be determined / mapped from file extension),
+     * @return string|false|null  mimetype (if it is an image, and type could be determined / guessed),
      *    false (if it is not an image type that the server knowns about)
      *    or null (if nothing can be determined)
      */

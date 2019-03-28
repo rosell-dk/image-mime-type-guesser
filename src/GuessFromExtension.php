@@ -67,7 +67,6 @@ class GuessFromExtension
             case 'zip':
             case 'gz':
                 return false;
-
         }
     }
 }

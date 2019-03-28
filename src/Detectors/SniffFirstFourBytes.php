@@ -24,7 +24,7 @@ class SniffFirstFourBytes extends AbstractDetector
      */
     protected function doDetect($filePath)
     {
-    	// PNG, GIF, JFIF JPEG, EXIF JPEF (respectively)
+        // PNG, GIF, JFIF JPEG, EXIF JPEF (respectively)
         $known = [
             '89504E47' => 'image/png',
             '47494638' => 'image/gif',
@@ -32,7 +32,7 @@ class SniffFirstFourBytes extends AbstractDetector
             'FFD8FFE1' => 'image/jpeg',  //  EXIF JPEG
         ];
 
-    	$handle = @fopen($filePath, 'r');
+        $handle = @fopen($filePath, 'r');
         if ($handle === false) {
             return;
         }

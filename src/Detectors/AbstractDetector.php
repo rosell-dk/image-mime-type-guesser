@@ -1,6 +1,7 @@
 <?php
 
 namespace ImageMimeTypeGuesser\Detectors;
+
 use ImageMimeTypeGuesser\Detectors\AbstractDetector;
 
 abstract class AbstractDetector
