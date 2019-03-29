@@ -1,8 +1,10 @@
 # image-mime-type-guesser
 
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/rosell-dk/image-mime-type-guesser/blob/master/LICENSE)
 [![Build Status](https://img.shields.io/travis/rosell-dk/image-mime-type-guesser/master.svg?style=flat-square)](https://travis-ci.org/rosell-dk/image-mime-type-guesser)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/rosell-dk/image-mime-type-guesser.svg?style=flat-square)](https://scrutinizer-ci.com/g/rosell-dk/image-mime-type-guesser/code-structure/master)
 [![Quality Score](https://img.shields.io/scrutinizer/g/rosell-dk/image-mime-type-guesser.svg?style=flat-square)](https://scrutinizer-ci.com/g/rosell-dk/image-mime-type-guesser/)
+
 
 
 *Detect / guess mime type of an image*
