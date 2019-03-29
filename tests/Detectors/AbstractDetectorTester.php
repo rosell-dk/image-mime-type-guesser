@@ -14,9 +14,10 @@ class AbstractDetectorTester
 
         if (is_null($result)) {
             // the detector could not detect. That is ok.
-            echo 'Notice: ' . self::$currentDetectorClassName . ' could not detect that: ' .
-            $fileName . ' ' . ($expectedResult === false ? 'is not an image' : 'should result in' . $expectedResult) . "\n";
-            self::$currentTestInstance->assertEquals(true, true);
+            //echo 'Notice: ' . self::$currentDetectorClassName . ' could not detect that: ' .
+            //$fileName . ' ' . ($expectedResult === false ? 'is not an image' : 'should result in' . $expectedResult) . "\n";
+
+            self::$currentTestInstance->addToAssertionCount(1);
         } else {
             // we got either false or a mime type...
             self::$currentTestInstance->assertEquals($expectedResult, $result);
@@ -46,7 +47,8 @@ class AbstractDetectorTester
 
         // not images
         self::testDetectSingle('not-images/non-existing', false);
-        self::testDetectSingle('not-images/txt-test.txt', false);
+        //self::testDetectSingle('not-images/txt-test.txt', false);
+        self::testDetectSingle('not-images/txt-test-very-small.txt', false);    // For some reason getimagesize throws a read error exception on so small files.
 
     }
 }
