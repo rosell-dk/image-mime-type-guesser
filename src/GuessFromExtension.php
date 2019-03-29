@@ -37,6 +37,9 @@ class GuessFromExtension
      */
     public static function guess($filePath)
     {
+        if (!@file_exists($filePath)) {
+            return false;
+        }
         $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
         $fileExtension = strtolower($fileExtension);
 
@@ -69,4 +72,5 @@ class GuessFromExtension
                 return false;
         }
     }
+
 }
