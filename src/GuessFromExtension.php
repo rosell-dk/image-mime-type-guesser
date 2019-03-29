@@ -40,8 +40,23 @@ class GuessFromExtension
         if (!@file_exists($filePath)) {
             return false;
         }
-        $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
-        $fileExtension = strtolower($fileExtension);
+        /*
+        Not using pathinfo, as it is locale aware, and I'm not sure if that could lead to problems
+
+        if (!function_exists('pathinfo')) {
+            // This is really a just in case! - We do not expect this to happen.
+            // - in fact we have a test case asserting that this does not happen.
+            return null;
+            //
+            $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
+            $fileExtension = strtolower($fileExtension);
+        }*/
+
+        $result = preg_match('#\\.([^.]*)$#', $filePath, $matches);
+        if ($result !== 1) {
+            return null;
+        }
+        $fileExtension = $matches[1];
 
         switch ($fileExtension) {
             case 'bmp':
@@ -71,6 +86,9 @@ class GuessFromExtension
             case 'gz':
                 return false;
         }
+
+        // We do not know this extension, return null
+        return null;
     }
 
 }
