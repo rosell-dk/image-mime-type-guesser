@@ -58,15 +58,18 @@ class GuessFromExtension
         }
         $fileExtension = $matches[1];
 
-        switch ($fileExtension) {
-            case 'bmp':
-            case 'gif':
-            case 'jpeg':
-            case 'png':
-            case 'tiff':
-            case 'webp':
-                return 'image/' . $fileExtension;
+        // Trivial image mime types
+        if (in_array($fileExtension, ['bmp', 'gif', 'jpeg', 'png', 'tiff', 'webp'])) {
+            return 'image/' . $fileExtension;
+        }
 
+        // Common extensions that are definitely not images
+        if (in_array($fileExtension, ['txt', 'doc', 'zip', 'gz', 'exe'])) {
+            return false;
+        }
+
+        // Non-trivial image mime types
+        switch ($fileExtension) {
             case 'ico':
                 return 'image/vnd.microsoft.icon';      // or perhaps 'x-icon' ?
 
@@ -78,13 +81,6 @@ class GuessFromExtension
 
             case 'tif':
                 return 'image/tiff';
-
-            case 'txt':
-            case 'doc':
-            case 'exe':
-            case 'zip':
-            case 'gz':
-                return false;
         }
 
         // We do not know this extension, return null
