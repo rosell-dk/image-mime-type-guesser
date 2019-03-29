@@ -38,7 +38,7 @@ class ImageMimeTypeGuesserTest extends TestCase
         function doGuessTest($fileName, $expectedResult) {
             global $thisTest;
             $result = ImageMimeTypeGuesser::guess(__DIR__ . '/images/' . $fileName);
-            $thisTest->assertEquals($expectedResult, $result);
+            $thisTest->assertSame($expectedResult, $result);
         }
 
         doGuessTest('gif-test.gif', 'image/gif');
@@ -53,7 +53,7 @@ class ImageMimeTypeGuesserTest extends TestCase
         function doDetectIsInTest($fileName, $mimeArray, $expectedResult) {
             global $thisTest;
             $result = ImageMimeTypeGuesser::detectIsIn(__DIR__ . '/images/' . $fileName, $mimeArray);
-            $thisTest->assertEquals($expectedResult, $result);
+            $thisTest->assertSame($expectedResult, $result);
         }
 
         doDetectIsInTest('nonexisting', ['image/gif'], false);
@@ -68,7 +68,7 @@ class ImageMimeTypeGuesserTest extends TestCase
         function doGuessIsInTest($fileName, $mimeArray, $expectedResult) {
             global $thisTest;
             $result = ImageMimeTypeGuesser::guessIsIn(__DIR__ . '/images/' . $fileName, $mimeArray);
-            $thisTest->assertEquals($expectedResult, $result);
+            $thisTest->assertSame($expectedResult, $result);
         }
 
         doGuessIsInTest('gif-test.gif', ['image/gif'], true);
@@ -84,7 +84,7 @@ class ImageMimeTypeGuesserTest extends TestCase
         function doLenientGuessIsInTest($fileName, $mimeArray, $expectedResult) {
             global $thisTest;
             $result = ImageMimeTypeGuesser::lenientGuessIsIn(__DIR__ . '/images/' . $fileName, $mimeArray);
-            $thisTest->assertEquals($expectedResult, $result);
+            $thisTest->assertSame($expectedResult, $result);
         }
 
         doLenientGuessIsInTest('webp-test.webp', ['image/webp'], true);

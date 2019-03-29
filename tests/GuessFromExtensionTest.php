@@ -8,6 +8,21 @@ use \PHPUnit\Framework\TestCase;
 class GuessFromExtensionTest extends TestCase
 {
 
+    public function testTestingEnvironmentAssumptions()
+    {
+        $this->assertTrue(file_exists(__DIR__ . '/images/gif-test.gif'), 'Test image is not available! (gif-test.gif)');
+        $this->assertTrue(file_exists(__DIR__ . '/images/webp-test.webp'), 'Test image is not available! (webp-test.webp)');
+        $this->assertTrue(file_exists(__DIR__ . '/images/button.svg'));
+    }
+
+    /*
+    public function testGuessAssumptions()
+    {
+        $this->assertTrue(function_exists('pathinfo'), 'pathinfo is not available! - We thought it was available on all platforms (PHP >= 5.6)');
+        $this->assertTrue(defined('PATHINFO_EXTENSION'), 'PATHINFO_EXTENSION is not defined');
+    }
+    */
+
     public function testGuess()
     {
 
@@ -22,17 +37,6 @@ class GuessFromExtensionTest extends TestCase
             $thisTest->assertSame($expectedResult, $result);
         }
 
-/*
-        function doTest2($fileName) {
-            return GuessFromExtension::guess(__DIR__ . '/images/' . $fileName);
-        }
-*/
-
-//        $this->assertEquals('image/gif', doTest2('gif-test.gif'));
-//        $this->assertEquals('image/gif', GuessFromExtension::guess(__DIR__ . '/images/' . 'gif-test.gif'));
-
-//        $this->assertSame(false, GuessFromExtension::guess2());
-
 
         // common mime types
         doTest('gif-test.gif', 'image/gif');
@@ -43,10 +47,11 @@ class GuessFromExtensionTest extends TestCase
         doTest('webp-test.webp', 'image/webp');
         doTest('button.svg', 'image/svg+xml');
 
-
         // special cases
         doTest('jpg-with space.jpg', 'image/jpeg');
         doTest('png-with-jpeg-extension.jpg', 'image/jpeg');
+        doTest('.jpg-beginning-with-dot.jpg', 'image/jpeg');
+        doTest('jpg-ending-with-dot.jpg.', null);
 
         // not images
         doTest('nonexisting', false);
