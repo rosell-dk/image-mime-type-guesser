@@ -7,18 +7,18 @@
 
 *Detect / guess mime type of an image*
 
-Do you need to determine if a file is an image? And perhaps you also want to know the mime type of the image?
-
-Do you basically need [exif_imagetype](https://www.php.net/manual/en/function.exif-imagetype.php)], but which also works when PHP is compiled without exif?
+Do you need to determine if a file is an image?<br>
+And perhaps you also want to know the mime type of the image?<br>
+Do you basically need [exif_imagetype](https://www.php.net/manual/en/function.exif-imagetype.php), but which also works when PHP is compiled without exif?
 
 &ndash; You come to the right library.
 
 Ok, actually the library cannot offer mime type detection for images which works *on all platforms*, but it can try a whole stack of methods and optionally fall back to guess from the file extension.
 
-The stack of methods are currently (and in that order):
+The stack of detect methods are currently (and in that order):
 -  [`exif_imagetype`](https://www.php.net/manual/en/function.exif-imagetype.php) *(PHP 4 >= 4.3.0, PHP 5, PHP 7) - unless PHP is compiled without exif*
 -  [`finfo`](https://www.php.net/manual/en/class.finfo.php) *(PHP 5 >= 5.3.0, PHP 7, PECL fileinfo >= 0.1.0) - requires fileinfo extension to be enabled*
--  Our custom 4 byte sniffer (based on [this](http://phil.lavin.me.uk/2011/12/php-accurately-detecting-the-type-of-a-file/)) *(PHP 4, PHP 5, PHP 7) - only detects png, gif and jpeg*
+-  Our custom 4 byte sniffer (based on [this code](http://phil.lavin.me.uk/2011/12/php-accurately-detecting-the-type-of-a-file/)) *(PHP 4, PHP 5, PHP 7) - only detects png, gif and jpeg*
 -  [`getimagesize`](https://www.php.net/getimagesize) *(PHP 4, PHP 5, PHP 7)*
 -  [`mime_content_type`](https://www.php.net/manual/en/function.mime-content-type.php) *(PHP 4 >= 4.3.0, PHP 5, PHP 7)*
 
@@ -32,7 +32,7 @@ Install with composer
 
 ## Usage
 
-Use `ImageMimeTypeGuesser::detect` if you do not want the library to make a wild guess, but accept that the library may not be able to determine mime type.
+Use `ImageMimeTypeGuesser::detect` if you do not want the library to make a wild guess based on file extension, but in return are willing to accept the increased probability of the library not returning a mime type as an answer.
 
 Example:
 ```php
@@ -47,9 +47,9 @@ if (is_null($result)) {
 }
 ```
 
-If you are ok with wild guessing from file extension, use `ImageMimeTypeGuesser::guess`.
+If you are ok with wild guessing from file extension, use `ImageMimeTypeGuesser::guess` or `ImageMimeTypeGuesser::lenientGuess`. Lets start with the first.
 
-It will first try detection. If detection fails (void is returned), it will fall back to guessing from extension using `GuessFromExtension::guess`.
+`ImageMimeTypeGuesser::guess` will first try detection. If detection fails (void is returned), it will fall back to guessing from extension using `GuessFromExtension::guess`.
 
 As with the detect method, it also has three possible outcomes: a mime type, false or void.
 
