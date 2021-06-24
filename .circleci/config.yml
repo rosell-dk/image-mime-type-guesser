@@ -44,3 +44,7 @@ jobs:
       - run: ./vendor/bin/phpunit
       # - run: ./vendor/bin/codecept build
       # - run: ./vendor/bin/codecept run
+      - run: wget https://scrutinizer-ci.com/ocular.phar
+      - run: php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+
+      
