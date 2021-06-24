@@ -48,7 +48,7 @@ jobs:
           key: v0-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
-      - run: ./vendor/bin/phpunit
+      - run: ./composer test
 
 workflows:
   version: 2
