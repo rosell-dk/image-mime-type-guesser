@@ -33,7 +33,7 @@ jobs:
       - run: php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
       
-  build:
+  build2:
     docker:
       - image: circleci/php:7.2
 
