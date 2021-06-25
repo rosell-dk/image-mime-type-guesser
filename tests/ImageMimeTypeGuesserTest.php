@@ -90,5 +90,9 @@ class ImageMimeTypeGuesserTest extends TestCase
         doLenientGuessIsInTest('webp-test.webp', ['image/webp'], true);
     }
 
+    public function failOnPurpose()
+    {
+        $this->assertEquals(true, false);
+    }
 
 }
