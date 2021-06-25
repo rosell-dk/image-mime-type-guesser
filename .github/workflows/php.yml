@@ -69,7 +69,9 @@ jobs:
 
     - name: Upload Scrutinizer coverage
       uses: sudo-bot/action-scrutinizer@latest
-
+      with:
+        cli-args: "--format=php-clover build/logs/clover.xml"
+        
   php71:
     runs-on: ubuntu-18.04
     steps:
