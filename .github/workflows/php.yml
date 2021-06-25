@@ -1,5 +1,3 @@
-# TODO: cache composer
-
 name: PHP Composer
 
 on:
@@ -31,6 +29,15 @@ jobs:
 
     #- name: Downgrade PHP unit to a version that supports PHP 7.4
     #  run: composer require "phpunit/phpunit:^8.0" --dev
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php80-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php80-
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
@@ -71,7 +78,7 @@ jobs:
       uses: sudo-bot/action-scrutinizer@latest
       with:
         cli-args: "--format=php-clover build/logs/clover.xml"
-        
+
   php71:
     runs-on: ubuntu-18.04
     steps:
