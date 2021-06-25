@@ -99,6 +99,15 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php71-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php71-
+
     - name: Downgrade PHP unit to a version that supports PHP 7.1
       run: composer require "phpunit/phpunit:^7.0" --dev
 
