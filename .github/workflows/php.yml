@@ -45,7 +45,7 @@ jobs:
     - name: Run test suite
       run: composer run-script test
 
-  php74:
+  php74andcodecov:
     runs-on: ubuntu-20.04
     steps:
     - name: Checkout
