@@ -37,6 +37,7 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '7.0'
+        tools: phpstan
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
@@ -46,3 +47,6 @@ jobs:
 
     - name: Run test suite
       run: composer run-script test
+
+    - name: Run PHPStan
+      run: phpstan analyse src
