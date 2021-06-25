@@ -1,3 +1,5 @@
+# TODO: cache composer
+
 name: PHP Composer
 
 on:
@@ -64,6 +66,9 @@ jobs:
 
     - name: Run test suite
       run: composer run-script test
+
+    - name: Upload Scrutinizer coverage
+      uses: sudo-bot/action-scrutinizer@latest
 
   php71:
     runs-on: ubuntu-18.04
