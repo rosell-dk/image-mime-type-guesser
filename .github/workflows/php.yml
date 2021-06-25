@@ -1,3 +1,4 @@
+# TODO: Cache for 7.4 and 5.6 as well
 name: PHP Composer
 
 on:
