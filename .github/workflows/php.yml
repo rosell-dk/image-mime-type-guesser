@@ -22,9 +22,8 @@ jobs:
       run: composer validate --strict
 
     - name: Install dependencies
-      run:
-        - composer install --prefer-dist --no-progress
-        - composer require "phpunit/phpunit:5.7.27" --dev
+      run: composer install --prefer-dist --no-progress
+      run: composer require "phpunit/phpunit:5.7.27" --dev
 
     - name: Run test suite
       run: composer run-script test
