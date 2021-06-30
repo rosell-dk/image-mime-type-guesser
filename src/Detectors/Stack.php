@@ -23,7 +23,7 @@ class Stack extends AbstractDetector
             'ExifImageType',
             'FInfo',
             'SniffFirstFourBytes',
-            'GetImageSize',
+            //'GetImageSize',   // Disabled, as documentation says it is unreliable
             'MimeContentType',
         ];
 
