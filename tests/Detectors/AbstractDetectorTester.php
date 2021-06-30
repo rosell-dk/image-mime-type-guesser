@@ -46,7 +46,7 @@ class AbstractDetectorTester
         self::trySingle('jpg-test.jpg', 'image/jpeg');
         self::trySingle('png-test.png', 'image/png');
         self::trySingle('tif-test.tif', 'image/tiff');
-        // self::trySingle('webp-test.webp', 'image/webp');      // Disabled webp test, as the image/webp mime type is not on travis...
+        self::trySingle('webp-test.webp', 'image/webp');
 
         // special cases
         self::trySingle('jpg-with space.jpg', 'image/jpeg');
