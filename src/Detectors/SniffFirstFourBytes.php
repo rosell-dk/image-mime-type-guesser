@@ -30,6 +30,7 @@ class SniffFirstFourBytes extends AbstractDetector
             '47494638' => 'image/gif',
             'FFD8FFE0' => 'image/jpeg',  //  JFIF JPEG
             'FFD8FFE1' => 'image/jpeg',  //  EXIF JPEG
+            '52494646' => 'image/webp',
         ];
 
         $handle = @fopen($filePath, 'r');
@@ -42,6 +43,14 @@ class SniffFirstFourBytes extends AbstractDetector
         }
         $key = strtoupper(bin2hex($firstFour));
         if (isset($known[$key])) {
+            if ($known[$key] == 'image/webp') {
+                // https://stackoverflow.com/questions/45321665/magic-number-for-google-image-format
+                $secondFour = @fread($handle, 4);
+                $thirdFour = @fread($handle, 4);
+                if (strtoupper(bin2hex($thirdFour)) !== '57454250') {
+                    return null;
+                }
+            }
             return $known[$key];
         }
     }
