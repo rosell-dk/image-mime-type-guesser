@@ -20,9 +20,9 @@ class Stack extends AbstractDetector
     protected function doDetect($filePath)
     {
         $detectors = [
-            'ExifImageType',
-            'FInfo',
             'SniffFirstFourBytes',
+            'FInfo',
+            'ExifImageType',
             //'GetImageSize',   // Disabled, as documentation says it is unreliable
             'MimeContentType',
         ];
