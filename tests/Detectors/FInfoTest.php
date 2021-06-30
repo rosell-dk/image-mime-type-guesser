@@ -29,14 +29,27 @@ namespace Tests\ImageMimeTypeGuesser\Detectors {
         public function testDoDetect()
         {
             self::$pretendTheseClassesDoesNotExist = [];
-            AbstractDetectorTester::testDetect($this, 'FInfo');
+            AbstractDetectorTester::tryDetect($this, 'FInfo');
         }
 
         public function testDoDetectFunctionNotExisting()
         {
             self::$pretendTheseClassesDoesNotExist = ['finfo'];
-            AbstractDetectorTester::testDetect($this, 'FInfo');
+            AbstractDetectorTester::tryDetect($this, 'FInfo', false);
         }
+
+        public function testCanThisBeTested()
+        {
+            self::$pretendTheseClassesDoesNotExist = [];
+            if (!class_exists('finfo')) {
+                $this->markTestIncomplete(
+                    'finfo class not available, so it cannot be tested'
+                );
+            } else {
+                $this->addToAssertionCount(1);
+            }
+        }
+
 
     }
 

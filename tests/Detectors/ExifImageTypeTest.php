@@ -10,7 +10,7 @@ class ExifImageTypeTest extends TestCase
 {
     public function testDoDetect()
     {
-        AbstractDetectorTester::testDetect($this, 'ExifImageType');
+        AbstractDetectorTester::tryDetect($this, 'ExifImageType');
     }
 
     public function testImplicitAssumptionsAboutExistingFunctions()
@@ -19,6 +19,17 @@ class ExifImageTypeTest extends TestCase
         // Make that assumption explicit.
         if (function_exists('exif_imagetype')) {
             $this->assertTrue(function_exists('image_type_to_mime_type'), 'implicit assumption that image_type_to_mime_type() exists on all systems where exif_imagetype() exists does not hold!');
+        }
+    }
+
+    public function testCanThisBeTested()
+    {
+        if (!class_exists('exif_imagetype')) {
+            $this->markTestIncomplete(
+                'exif_imagetype method not available, so it cannot be tested'
+            );
+        } else {
+            $this->addToAssertionCount(1);
         }
     }
 

@@ -10,6 +10,6 @@ class SniffFirstFourBytesTest extends TestCase
 {
     public function testDoDetect()
     {
-        AbstractDetectorTester::testDetect($this, 'SniffFirstFourBytes');
+        AbstractDetectorTester::tryDetect($this, 'SniffFirstFourBytes', false);
     }
 }

@@ -48,7 +48,7 @@ namespace Tests\ImageMimeTypeGuesser\Detectors {
             global $pretendTheseFunctionDoesNotExist;
             $pretendTheseFunctionDoesNotExist = [];
             self::$useMock = false;
-            AbstractDetectorTester::testDetect($this, 'MimeContentType');
+            AbstractDetectorTester::tryDetect($this, 'MimeContentType');
         }
 
         public function testDoDetectFunctionNotExisting()
@@ -56,7 +56,7 @@ namespace Tests\ImageMimeTypeGuesser\Detectors {
             global $pretendTheseFunctionDoesNotExist;
             $pretendTheseFunctionDoesNotExist = ['mime_content_type'];
             self::$useMock = false;
-            AbstractDetectorTester::testDetect($this, 'MimeContentType');
+            AbstractDetectorTester::tryDetect($this, 'MimeContentType', false);
         }
 
         public function testDoDetectFunctionThrowingException()
@@ -64,7 +64,20 @@ namespace Tests\ImageMimeTypeGuesser\Detectors {
             global $pretendTheseFunctionDoesNotExist;
             $pretendTheseFunctionDoesNotExist = [];
             self::$useMock = true;
-            AbstractDetectorTester::testDetect($this, 'MimeContentType');
+            AbstractDetectorTester::tryDetect($this, 'MimeContentType', false);
+        }
+
+        public function testCanThisBeTested()
+        {
+            global $pretendTheseFunctionDoesNotExist;
+            $pretendTheseFunctionDoesNotExist = [];
+            if (!class_exists('mime_content_type')) {
+                $this->markTestIncomplete(
+                    'mime_content_type class not available, so it cannot be tested'
+                );
+            } else {
+                $this->addToAssertionCount(1);
+            }
         }
 
     }

@@ -5,8 +5,9 @@ class AbstractDetectorTester
 {
     private static $currentTestInstance;
     private static $currentDetectorClassName;
+    private static $markIncompleteWhenNull;
 
-    private static function testDetectSingle($fileName, $expectedResult)
+    private static function trySingle($fileName, $expectedResult)
     {
         $filePath = __DIR__ . '/../images/' . $fileName;
 
@@ -17,7 +18,15 @@ class AbstractDetectorTester
             //echo 'Notice: ' . self::$currentDetectorClassName . ' could not detect that: ' .
             //$fileName . ' ' . ($expectedResult === false ? 'is not an image' : 'should result in' . $expectedResult) . "\n";
 
-            self::$currentTestInstance->addToAssertionCount(1);
+            //self::$currentTestInstance->addToAssertionCount(1);
+
+            if (self::$markIncompleteWhenNull) {
+              self::$currentTestInstance->markTestIncomplete(
+                self::$currentDetectorClassName . ' could not be tested (file:' .
+                $fileName . ')'
+              );
+
+            }
         } else {
             // we got either false or a mime type...
             self::$currentTestInstance->assertEquals($expectedResult, $result);
@@ -25,30 +34,37 @@ class AbstractDetectorTester
 
     }
 
-    public static function testDetect($testInstance, $detectorClassName)
+    public static function tryDetect($testInstance, $detectorClassName, $markIncompleteWhenNull = true)
     {
         self::$currentTestInstance = $testInstance;
         self::$currentDetectorClassName = $detectorClassName;
+        self::$markIncompleteWhenNull = $markIncompleteWhenNull;
 
         // standard image formats
-        self::testDetectSingle('gif-test.gif', 'image/gif');
-        //self::testDetectSingle('ico-test.ico', 'image/vnd.microsoft.icon');
-        self::testDetectSingle('jpg-test.jpg', 'image/jpeg');
-        self::testDetectSingle('png-test.png', 'image/png');
-        self::testDetectSingle('tif-test.tif', 'image/tiff');
-        // self::testDetectSingle('webp-test.webp', 'image/webp');      // Disabled webp test, as the image/webp mime type is not on travis...
+        self::trySingle('gif-test.gif', 'image/gif');
+        //self::trySingle('ico-test.ico', 'image/vnd.microsoft.icon');
+        self::trySingle('jpg-test.jpg', 'image/jpeg');
+        self::trySingle('png-test.png', 'image/png');
+        self::trySingle('tif-test.tif', 'image/tiff');
+        // self::trySingle('webp-test.webp', 'image/webp');      // Disabled webp test, as the image/webp mime type is not on travis...
 
         // special cases
-        self::testDetectSingle('jpg-with space.jpg', 'image/jpeg');
-        self::testDetectSingle('png-with-jpeg-extension.jpg', 'image/png');
-        self::testDetectSingle('png-without-extension', 'image/png');
-        self::testDetectSingle('png-not-true-color.png', 'image/png');
-        self::testDetectSingle('png-very-small.png', 'image/png');
+        self::trySingle('jpg-with space.jpg', 'image/jpeg');
+        self::trySingle('png-with-jpeg-extension.jpg', 'image/png');
+        self::trySingle('png-without-extension', 'image/png');
+        self::trySingle('png-not-true-color.png', 'image/png');
+        self::trySingle('png-very-small.png', 'image/png');
 
         // not images
-        self::testDetectSingle('not-images/non-existing', false);
-        //self::testDetectSingle('not-images/txt-test.txt', false);
-        self::testDetectSingle('not-images/txt-test-very-small.txt', false);    // For some reason getimagesize throws a read error exception on so small files.
+        self::trySingle('not-images/non-existing', false);
+        //self::trySingle('not-images/txt-test.txt', false);
+
+        // For some reason many file functions throws a read error exception on so small files.
+        // - GetImageSize fails
+        // - ExifImageType fails
+        // - FInfo fails
+        self::$markIncompleteWhenNull = false;
+        self::trySingle('not-images/txt-test-very-small.txt', false);
 
     }
 }

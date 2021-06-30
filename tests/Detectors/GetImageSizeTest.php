@@ -45,14 +45,27 @@ namespace Tests\ImageMimeTypeGuesser\Detectors {
         {
             global $pretendTheseFunctionDoesNotExist;
             $pretendTheseFunctionDoesNotExist = [];
-            AbstractDetectorTester::testDetect($this, 'GetImageSize');
+            AbstractDetectorTester::tryDetect($this, 'GetImageSize');
         }
 
         public function testDoDetectFunctionNotExisting()
         {
             global $pretendTheseFunctionDoesNotExist;
             $pretendTheseFunctionDoesNotExist = ['getimagesize'];
-            AbstractDetectorTester::testDetect($this, 'GetImageSize');
+            AbstractDetectorTester::tryDetect($this, 'GetImageSize', false);
+        }
+
+        public function testCanThisBeTested()
+        {
+            global $pretendTheseFunctionDoesNotExist;
+            $pretendTheseFunctionDoesNotExist = [];
+            if (!class_exists('getimagesize')) {
+                $this->markTestIncomplete(
+                    'getimagesize class not available, so it cannot be tested'
+                );
+            } else {
+                $this->addToAssertionCount(1);
+            }
         }
 
     }
