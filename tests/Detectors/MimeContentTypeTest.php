@@ -71,7 +71,7 @@ namespace Tests\ImageMimeTypeGuesser\Detectors {
         {
             global $pretendTheseFunctionDoesNotExist;
             $pretendTheseFunctionDoesNotExist = [];
-            if (!class_exists('mime_content_type')) {
+            if (!function_exists('mime_content_type')) {
                 $this->markTestIncomplete(
                     'mime_content_type class not available, so it cannot be tested'
                 );

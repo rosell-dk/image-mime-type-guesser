@@ -24,7 +24,7 @@ class ExifImageTypeTest extends TestCase
 
     public function testCanThisBeTested()
     {
-        if (!class_exists('exif_imagetype')) {
+        if (!function_exists('exif_imagetype')) {
             $this->markTestIncomplete(
                 'exif_imagetype method not available, so it cannot be tested'
             );

@@ -59,7 +59,7 @@ namespace Tests\ImageMimeTypeGuesser\Detectors {
         {
             global $pretendTheseFunctionDoesNotExist;
             $pretendTheseFunctionDoesNotExist = [];
-            if (!class_exists('getimagesize')) {
+            if (!function_exists('getimagesize')) {
                 $this->markTestIncomplete(
                     'getimagesize class not available, so it cannot be tested'
                 );
