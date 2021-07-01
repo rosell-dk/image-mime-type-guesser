@@ -91,3 +91,10 @@ if (ImageMimeTypeGuesser::guessIsIn($filePath, ['image/jpeg','image/png'])) {
     // The file appears to be a jpeg or a png
 }
 ```
+
+## Alternatives
+
+Other sniffers:
+- https://github.com/Intervention/mimesniffer
+- https://github.com/zjsxwc/mime-type-sniffer
+- https://github.com/Tinram/File-Identifier
