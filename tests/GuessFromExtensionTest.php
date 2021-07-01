@@ -41,7 +41,7 @@ class GuessFromExtensionTest extends TestCase
         // common mime types
         doTest('gif-test.gif', 'image/gif');
         doTest('jpg-test.jpg', 'image/jpeg');
-        doTest('ico-test.ico', 'image/vnd.microsoft.icon');
+        doTest('ico-test.ico', 'image/x-icon');
         doTest('png-test.png', 'image/png');
         doTest('tif-test.tif', 'image/tiff');
         doTest('webp-test.webp', 'image/webp');
