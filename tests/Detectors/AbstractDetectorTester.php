@@ -57,6 +57,8 @@ class AbstractDetectorTester
         // - ExifImageType: image/jp2
         // - GetImageSizeTest: false
         //self::trySingle('balloon.jpf', 'image/jpx');
+        //self::trySingle('balloon.jpm', 'image/jpm');
+        //self::trySingle('Speedway.mj2', 'video/mj2');
 
         // image/webp test is disabled, as it is not added on all servers.
         // Specifically, one of our github actions jobs fails

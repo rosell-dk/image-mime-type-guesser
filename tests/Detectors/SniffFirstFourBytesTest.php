@@ -81,7 +81,25 @@ TODO: Find a small jp2 image for test
             'image/jpx',
             SniffFirstFourBytes::detect(self::$imagePath . 'balloon.jpf')
         );
+    }
+    public function testJpx()
+    {
+        $this->assertEquals(
+            'image/jpm',
+            SniffFirstFourBytes::detect(self::$imagePath . 'balloon.jpm')
+        );
     }*/
+    /*public function testMj2()
+    {
+        // PS: At least one document says it it "video/mjp2" (not "video/mj2"
+        // - according to http://fileformats.archiveteam.org/wiki/MJ2
+        $this->assertEquals(
+            'video/mj2',
+            SniffFirstFourBytes::detect(self::$imagePath . 'Speedway.mj2')
+        );
+    }
+
+    */
 
 /*
     public function testUnsupported()

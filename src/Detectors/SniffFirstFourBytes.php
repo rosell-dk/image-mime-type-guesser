@@ -54,7 +54,11 @@ class SniffFirstFourBytes extends AbstractDetector
                     }
                     if (substr($sampleBin, $block1Size + 4, 4) == 'ftyp') {
                         $subtyp = substr($sampleBin, $block1Size + 8, 4);
-                        return 'image/' . rtrim($subtyp);
+                        if ($subtyp == 'mjp2') {
+                            return 'video/mj2';
+                        } else {
+                            return 'image/' . rtrim($subtyp);
+                        }
                     }
                 }
 
