@@ -55,6 +55,34 @@ class SniffFirstFourBytesTest extends TestCase
         );
     }
 
+    public function testJp2()
+    {
+/*
+        $handle = @fopen(self::$imagePath . 'jpeg-2000-jp2-test.jp2', 'r');
+        $sampleBin = @fread($handle, 20);
+        $firstByte = $sampleBin[0];
+        $sampleHex = strtoupper(bin2hex($sampleBin));
+
+        echo 'jp2:' . $sampleHex;
+// https://www.file-recovery.com/jp2-signature-format.htm
+*/
+
+        $this->assertEquals(
+            'image/jp2',
+            SniffFirstFourBytes::detect(self::$imagePath . 'jpeg-2000-jp2-test.jp2')
+        );
+    }
+
+/*
+TODO: Find a small jp2 image for test
+    public function testJpx()
+    {
+        $this->assertEquals(
+            'image/jpx',
+            SniffFirstFourBytes::detect(self::$imagePath . 'balloon.jpf')
+        );
+    }*/
+
 /*
     public function testUnsupported()
     {

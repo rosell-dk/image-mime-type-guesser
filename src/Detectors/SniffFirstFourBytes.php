@@ -42,6 +42,22 @@ class SniffFirstFourBytes extends AbstractDetector
         switch ($firstByte) {
             case "\x00":
                 $hexPatterns[] = ['image/x-icon', "/^00000(1?2)00/"];
+
+                if (preg_match("/^.{8}6A502020/", $sampleHex) === 1) {
+                  // jpeg-2000 - a bit more complex, as block size may vary
+                  // https://www.file-recovery.com/jp2-signature-format.htm
+                  $block1Size = hexdec("0x" . substr($sampleHex, 0, 8));
+
+                  $moreBytes = @fread($handle, $block1Size + 4 + 8);
+                  if ($moreBytes !== false) {
+                    $sampleBin .= $moreBytes;
+                  }
+                  if (substr($sampleBin, $block1Size + 4, 4) == 'ftyp') {
+                      $subtyp = substr($sampleBin, $block1Size + 8, 4);
+                      return 'image/' . rtrim($subtyp);
+                  }
+                }
+
                 break;
 
             case "8":
@@ -106,8 +122,6 @@ class SniffFirstFourBytes extends AbstractDetector
         return null;
 
         /*
-        Other sniffers:
-        https://github.com/Intervention/mimesniffer
         https://en.wikipedia.org/wiki/List_of_file_signatures
         https://github.com/zjsxwc/mime-type-sniffer/blob/master/src/MimeTypeSniffer/MimeTypeSniffer.php
         http://phil.lavin.me.uk/2011/12/php-accurately-detecting-the-type-of-a-file/
@@ -121,36 +135,8 @@ class SniffFirstFourBytes extends AbstractDetector
         From: https://github.com/Tinram/File-Identifier/blob/master/src/FileSignatures.php
         'JPG 2000' => '00 00 00 0c 6a 50 20 20 0d 0a 87 0a',
         https://filesignatures.net/index.php?page=search&search=JP2&mode=EXT
+        */
 
-        TODO: More TIFF signatures?
-        A library defines:
-        new MagicNumber("image/tiff", "I I"),
-        new MagicNumber("image/tiff", "II*"),
-        new MagicNumber("image/tiff", "MM\x00*"),
-
-        TODO: Raw.
-        A library defines:
-        // RAW image types.
-        new MagicNumber("image/x-canon-cr2", "II\x2a\x00\x10\x00\x00\x00CR"),
-        new MagicNumber("image/x-canon-crw", "II\x1a\x00\x00\x00HEAPCCDR"),
-        new MagicNumber("image/x-minolta-mrw", "\x00MRM"),
-        new MagicNumber("image/x-olympus-orf", "MMOR"),  // big-endian
-        new MagicNumber("image/x-olympus-orf", "IIRO"),  // little-endian
-        new MagicNumber("image/x-olympus-orf", "IIRS"),  // little-endian
-        new MagicNumber("image/x-fuji-raf", "FUJIFILMCCD-RAW "),
-        new MagicNumber("image/x-panasonic-raw",
-            "IIU\x00\x08\x00\x00\x00"),  // Panasonic .raw
-        new MagicNumber("image/x-panasonic-raw",
-            "IIU\x00\x18\x00\x00\x00"),  // Panasonic .rw2
-        new MagicNumber("image/x-phaseone-raw", "MMMMRaw"),
-        new MagicNumber("image/x-x3f", "FOVb"),
-
-        TODO: Also expect "VP" to WEBP?
-        A library defines:
-        new MagicNumber("image/webp", "RIFF....WEBPVP"),
-
-        TODO:
-        new MagicNumber("image/x-xbitmap", "#define"),*/
 
     }
 }

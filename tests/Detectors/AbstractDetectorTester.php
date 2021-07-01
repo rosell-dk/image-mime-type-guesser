@@ -40,12 +40,23 @@ class AbstractDetectorTester
         self::$currentDetectorClassName = $detectorClassName;
         self::$markIncompleteWhenNull = $markIncompleteWhenNull;
 
+        // PS: GET sample files here:  https://filesamples.com/formats/jp2
+
         // standard image formats
         self::trySingle('gif-test.gif', 'image/gif');
-        //self::trySingle('ico-test.ico', 'image/vnd.microsoft.icon');
+        //self::trySingle('ico-test.ico', 'image/x-icon'); // disabled because exif says "vnd.microsoft.icon"
         self::trySingle('jpg-test.jpg', 'image/jpeg');
         self::trySingle('png-test.png', 'image/png');
         self::trySingle('tif-test.tif', 'image/tiff');
+
+        // more rare
+        self::trySingle('jpeg-2000-jp2-test.jp2', 'image/jp2');
+
+        // Total disagreement over this one:
+        // - FInfo, MimeContentTypeTest and Sniffer: image/jpx
+        // - ExifImageType: image/jp2
+        // - GetImageSizeTest: false
+        //self::trySingle('balloon.jpf', 'image/jpx');
 
         // image/webp test is disabled, as it is not added on all servers.
         // Specifically, one of our github actions jobs fails
