@@ -15,35 +15,53 @@ class SniffFirstFourBytesTest extends TestCase
         AbstractDetectorTester::tryDetect($this, 'SniffFirstFourBytes', false);
     }
 
-    public function testSupported()
+    public function testGif()
     {
         $this->assertEquals(
-            SniffFirstFourBytes::detect(self::$imagePath . 'gif-test.gif'),
-            'image/gif'
-        );
-
-        $this->assertEquals(
-            SniffFirstFourBytes::detect(self::$imagePath . 'jpg-test.jpg'),
-            'image/jpeg'
-        );
-
-        $this->assertEquals(
-            SniffFirstFourBytes::detect(self::$imagePath . 'png-test.png'),
-            'image/png'
-        );
-
-        $this->assertEquals(
-            SniffFirstFourBytes::detect(self::$imagePath . 'webp-test.webp'),
-            'image/webp'
+          'image/gif',
+            SniffFirstFourBytes::detect(self::$imagePath . 'gif-test.gif')
         );
     }
 
+    public function testJpeg()
+    {
+        $this->assertEquals(
+            'image/jpeg',
+            SniffFirstFourBytes::detect(self::$imagePath . 'jpg-test.jpg')
+        );
+    }
+
+    public function testPng()
+    {
+        $this->assertEquals(
+            'image/png',
+            SniffFirstFourBytes::detect(self::$imagePath . 'png-test.png')
+        );
+    }
+
+    public function testWebp()
+    {
+        $this->assertEquals(
+            'image/webp',
+            SniffFirstFourBytes::detect(self::$imagePath . 'webp-test.webp')
+        );
+    }
+
+    public function testTiff()
+    {
+        $this->assertEquals(
+            'image/tiff',
+            SniffFirstFourBytes::detect(self::$imagePath . 'tif-test.tif')
+        );
+    }
+
+/*
     public function testUnsupported()
     {
       $this->assertEquals(
-          SniffFirstFourBytes::detect(self::$imagePath . 'tif-test.tif'),
-          null
+          null,
+          SniffFirstFourBytes::detect(self::$imagePath . 'tif-test.tif')
       );
-    }
+    }*/
 
 }
