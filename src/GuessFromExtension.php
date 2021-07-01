@@ -70,8 +70,8 @@ class GuessFromExtension
 
         // Non-trivial image mime types
         switch ($fileExtension) {
-          case 'ico':
-          case 'cur':
+            case 'ico':
+            case 'cur':
                 return 'image/x-icon';      // or perhaps 'vnd.microsoft.icon' ?
 
             case 'jpg':
@@ -87,5 +87,4 @@ class GuessFromExtension
         // We do not know this extension, return null
         return null;
     }
-
 }

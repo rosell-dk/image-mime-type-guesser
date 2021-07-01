@@ -44,18 +44,18 @@ class SniffFirstFourBytes extends AbstractDetector
                 $hexPatterns[] = ['image/x-icon', "/^00000(1?2)00/"];
 
                 if (preg_match("/^.{8}6A502020/", $sampleHex) === 1) {
-                  // jpeg-2000 - a bit more complex, as block size may vary
-                  // https://www.file-recovery.com/jp2-signature-format.htm
-                  $block1Size = hexdec("0x" . substr($sampleHex, 0, 8));
+                    // jpeg-2000 - a bit more complex, as block size may vary
+                    // https://www.file-recovery.com/jp2-signature-format.htm
+                    $block1Size = hexdec("0x" . substr($sampleHex, 0, 8));
 
-                  $moreBytes = @fread($handle, $block1Size + 4 + 8);
-                  if ($moreBytes !== false) {
-                    $sampleBin .= $moreBytes;
-                  }
-                  if (substr($sampleBin, $block1Size + 4, 4) == 'ftyp') {
-                      $subtyp = substr($sampleBin, $block1Size + 8, 4);
-                      return 'image/' . rtrim($subtyp);
-                  }
+                    $moreBytes = @fread($handle, $block1Size + 4 + 8);
+                    if ($moreBytes !== false) {
+                        $sampleBin .= $moreBytes;
+                    }
+                    if (substr($sampleBin, $block1Size + 4, 4) == 'ftyp') {
+                        $subtyp = substr($sampleBin, $block1Size + 8, 4);
+                        return 'image/' . rtrim($subtyp);
+                    }
                 }
 
                 break;
@@ -88,7 +88,7 @@ class SniffFirstFourBytes extends AbstractDetector
                 // Note that <xml> tag might be big too... - so we read in 200 extra
                 $moreBytes = @fread($handle, 200);
                 if ($moreBytes !== false) {
-                  $sampleBin .= $moreBytes;
+                    $sampleBin .= $moreBytes;
                 }
                 $binPatterns[] = ['image/svg+xml', "/^(<\?xml[^>]*\?>.*)?<svg/is"];
                 break;
@@ -136,7 +136,5 @@ class SniffFirstFourBytes extends AbstractDetector
         'JPG 2000' => '00 00 00 0c 6a 50 20 20 0d 0a 87 0a',
         https://filesignatures.net/index.php?page=search&search=JP2&mode=EXT
         */
-
-
     }
 }
