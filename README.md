@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/rosell-dk/image-mime-type-guesser.svg?style=flat-square)](https://packagist.org/packages/rosell-dk/image-mime-type-guesser)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://php.net)
-[![Build Status](https://img.shields.io/github/workflow/status/rosell-dk/image-mime-type-guesser/PHP?style=flat-square)](https://github.com/rosell-dk/image-mime-type-guesser/actions/workflows/php.yml)
+[![Build Status](https://img.shields.io/github/workflow/status/rosell-dk/image-mime-type-guesser/PHP?logo=GitHub&style=flat-square)](https://github.com/rosell-dk/image-mime-type-guesser/actions/workflows/php.yml)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/rosell-dk/image-mime-type-guesser.svg?style=flat-square)](https://scrutinizer-ci.com/g/rosell-dk/image-mime-type-guesser/code-structure/master)
 [![Quality Score](https://img.shields.io/scrutinizer/g/rosell-dk/image-mime-type-guesser.svg?style=flat-square)](https://scrutinizer-ci.com/g/rosell-dk/image-mime-type-guesser/)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/rosell-dk/image-mime-type-guesser/blob/master/LICENSE)
