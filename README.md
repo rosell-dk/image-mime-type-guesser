@@ -6,6 +6,8 @@
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/rosell-dk/image-mime-type-guesser.svg?style=flat-square)](https://scrutinizer-ci.com/g/rosell-dk/image-mime-type-guesser/code-structure/master)
 [![Quality Score](https://img.shields.io/scrutinizer/g/rosell-dk/image-mime-type-guesser.svg?style=flat-square)](https://scrutinizer-ci.com/g/rosell-dk/image-mime-type-guesser/)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/rosell-dk/image-mime-type-guesser/blob/master/LICENSE)
+[![Monthly Downloads](http://poser.pugx.org/rosell-dk/image-mime-type-guesser/d/monthly)](https://packagist.org/packages/rosell-dk/image-mime-type-guesser)
+[![Dependents](http://poser.pugx.org/rosell-dk/image-mime-type-guesser/dependents)](https://packagist.org/packages/rosell-dk/image-mime-type-guesser/dependents?order_by=downloads)
 
 
 *Detect / guess mime type of an image*
