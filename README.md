@@ -98,3 +98,9 @@ Other sniffers:
 - https://github.com/Intervention/mimesniffer
 - https://github.com/zjsxwc/mime-type-sniffer
 - https://github.com/Tinram/File-Identifier
+
+## Do you like what I do?
+Perhaps you want to support my work, so I can continue doing it :)
+
+- [Become a backer or sponsor on Patreon](https://www.patreon.com/rosell).
+- [Buy me a Coffee](https://ko-fi.com/rosell)
