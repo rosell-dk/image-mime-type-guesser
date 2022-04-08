@@ -2,9 +2,9 @@ name: build
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 permissions:
   contents: read
@@ -20,7 +20,7 @@ jobs:
         php: [8.1]
 
     steps:
-    - name: Checkout...
+    - name: Checkout
       uses: actions/checkout@v3
 
     - name: Determine which version of xdebug to use
@@ -31,7 +31,7 @@ jobs:
         # Store XDEBUG in github env, so we can access it later through env.XDEBUG
         echo "XDEBUG=$XDEBUG" >> $GITHUB_ENV
 
-        echo "Result: ${{ env.XDEBUG }} "
+        echo "Result: ${{ env.XDEBUG }}"
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
