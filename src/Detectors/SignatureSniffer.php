@@ -5,7 +5,7 @@ namespace ImageMimeTypeGuesser\Detectors;
 use \ImageMimeTypeGuesser\Detectors\AbstractDetector;
 use \ImageMimeTypeSniffer\ImageMimeTypeSniffer;
 
-class SniffFirstFourBytes extends AbstractDetector
+class SignatureSniffer extends AbstractDetector
 {
 
     /**

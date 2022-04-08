@@ -21,7 +21,7 @@ class Stack extends AbstractDetector
     {
         $detectors = [
             'FInfo',
-            'SniffFirstFourBytes',
+            'SignatureSniffer',
             'ExifImageType',
             //'GetImageSize',   // Disabled, as documentation says it is unreliable
             'MimeContentType',

@@ -2,24 +2,24 @@
 namespace Tests\ImageMimeTypeGuesser\Detectors;
 
 use \Tests\ImageMimeTypeGuesser\Detectors\AbstractDetectorTester;
-use \ImageMimeTypeGuesser\Detectors\SniffFirstFourBytes;
+use \ImageMimeTypeGuesser\Detectors\SignatureSniffer;
 use \PHPUnit\Framework\TestCase;
 
 include_once 'AbstractDetectorTester.php';  // Not autoloaded, because it does not end with "Test"
 
-class SniffFirstFourBytesTest extends TestCase
+class SignatureSnifferTest extends TestCase
 {
     static $imagePath = __DIR__ . '/../images/';
     public function testDoDetect()
     {
-        AbstractDetectorTester::tryDetect($this, 'SniffFirstFourBytes', false);
+        AbstractDetectorTester::tryDetect($this, 'SignatureSniffer', false);
     }
 
     public function testGif()
     {
         $this->assertEquals(
           'image/gif',
-            SniffFirstFourBytes::detect(self::$imagePath . 'gif-test.gif')
+            SignatureSniffer::detect(self::$imagePath . 'gif-test.gif')
         );
     }
 
@@ -27,7 +27,7 @@ class SniffFirstFourBytesTest extends TestCase
     {
         $this->assertEquals(
             'image/jpeg',
-            SniffFirstFourBytes::detect(self::$imagePath . 'jpg-test.jpg')
+            SignatureSniffer::detect(self::$imagePath . 'jpg-test.jpg')
         );
     }
 
@@ -35,7 +35,7 @@ class SniffFirstFourBytesTest extends TestCase
     {
         $this->assertEquals(
             'image/png',
-            SniffFirstFourBytes::detect(self::$imagePath . 'png-test.png')
+            SignatureSniffer::detect(self::$imagePath . 'png-test.png')
         );
     }
 
@@ -43,7 +43,7 @@ class SniffFirstFourBytesTest extends TestCase
     {
         $this->assertEquals(
             'image/webp',
-            SniffFirstFourBytes::detect(self::$imagePath . 'webp-test.webp')
+            SignatureSniffer::detect(self::$imagePath . 'webp-test.webp')
         );
     }
 
@@ -51,7 +51,7 @@ class SniffFirstFourBytesTest extends TestCase
     {
         $this->assertEquals(
             'image/tiff',
-            SniffFirstFourBytes::detect(self::$imagePath . 'tif-test.tif')
+            SignatureSniffer::detect(self::$imagePath . 'tif-test.tif')
         );
     }
 
@@ -69,7 +69,7 @@ class SniffFirstFourBytesTest extends TestCase
 
         $this->assertEquals(
             'image/jp2',
-            SniffFirstFourBytes::detect(self::$imagePath . 'jpeg-2000-jp2-test.jp2')
+            SignatureSniffer::detect(self::$imagePath . 'jpeg-2000-jp2-test.jp2')
         );
     }
 
@@ -79,14 +79,14 @@ TODO: Find a small jp2 image for test
     {
         $this->assertEquals(
             'image/jpx',
-            SniffFirstFourBytes::detect(self::$imagePath . 'balloon.jpf')
+            SignatureSniffer::detect(self::$imagePath . 'balloon.jpf')
         );
     }
     public function testJpx()
     {
         $this->assertEquals(
             'image/jpm',
-            SniffFirstFourBytes::detect(self::$imagePath . 'balloon.jpm')
+            SignatureSniffer::detect(self::$imagePath . 'balloon.jpm')
         );
     }*/
     /*public function testMj2()
@@ -95,7 +95,7 @@ TODO: Find a small jp2 image for test
         // - according to http://fileformats.archiveteam.org/wiki/MJ2
         $this->assertEquals(
             'video/mj2',
-            SniffFirstFourBytes::detect(self::$imagePath . 'Speedway.mj2')
+            SignatureSniffer::detect(self::$imagePath . 'Speedway.mj2')
         );
     }
 
@@ -106,7 +106,7 @@ TODO: Find a small jp2 image for test
     {
       $this->assertEquals(
           null,
-          SniffFirstFourBytes::detect(self::$imagePath . 'tif-test.tif')
+          SignatureSniffer::detect(self::$imagePath . 'tif-test.tif')
       );
     }*/
 
