@@ -31,7 +31,7 @@ jobs:
         # Store XDEBUG in github env, so we can access it later through env.XDEBUG
         echo "XDEBUG=$XDEBUG" >> $GITHUB_ENV
 
-        echo "Result: ${{ env.XDEBUG }}"
+        echo "Result: ${{ env.XDEBUG }} "
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
