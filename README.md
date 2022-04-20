@@ -19,8 +19,8 @@ And perhaps you also want to know the mime type of the image?<br>
 Ok, actually the library cannot offer mime type detection for images which works *on all platforms*, but it can try a whole stack of methods and optionally fall back to guess from the file extension.
 
 The stack of detect methods are currently (and in that order):
--  [`finfo`](https://www.php.net/manual/en/class.finfo.php) *Requires fileinfo extension to be enabled. (PHP 5 >= 5.3.0, PHP 7, PHP 8, PECL fileinfo >= 0.1.0)*
 -  [This signature sniffer](https://github.com/rosell-dk/image-mime-type-sniffer) *Does not require any extensions. Recognizes popular image formats only*
+-  [`finfo`](https://www.php.net/manual/en/class.finfo.php) *Requires fileinfo extension to be enabled. (PHP 5 >= 5.3.0, PHP 7, PHP 8, PECL fileinfo >= 0.1.0)*
 -  [`exif_imagetype`](https://www.php.net/manual/en/function.exif-imagetype.php) *Requires that PHP is compiled with exif (PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)*
 -  [`mime_content_type`](https://www.php.net/manual/en/function.mime-content-type.php) *Requires fileinfo. (PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)*
 
@@ -30,7 +30,10 @@ Besides the detection methods, the library also comes with a method for mapping 
 
 ## Installation
 
-Install with composer
+Install with composer:
+```
+composer require rosell-dk/image-mime-type-guesser
+```
 
 ## Usage
 

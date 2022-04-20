@@ -27,6 +27,9 @@ class ImageMimeTypeGuesserTest extends TestCase
         }
 
         doDetectTest('gif-test.gif', 'image/gif');
+        doDetectTest('jpg-test.jpg', 'image/jpeg');
+        doDetectTest('avif-test.avif', 'image/avif');
+        //doDetectTest('heif-test.heif', 'image/heif');
         doDetectTest('not-images/txt-test.txt', false);
     }
 
