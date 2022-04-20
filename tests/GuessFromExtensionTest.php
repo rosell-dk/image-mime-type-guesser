@@ -51,7 +51,7 @@ class GuessFromExtensionTest extends TestCase
         doTest('jpg-with space.jpg', 'image/jpeg');
         doTest('png-with-jpeg-extension.jpg', 'image/jpeg');
         doTest('.jpg-beginning-with-dot.jpg', 'image/jpeg');
-        doTest('jpg-ending-with-dot.jpg.', null);
+        //doTest('jpg-ending-with-dot.jpg.', null);   Disabled. The mere precence of that file causes checkout error on Windows
 
         // not images
         doTest('nonexisting', false);
