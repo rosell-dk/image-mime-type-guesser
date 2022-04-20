@@ -20,7 +20,7 @@ Ok, actually the library cannot offer mime type detection for images which works
 
 The stack of detect methods are currently (and in that order):
 -  [`finfo`](https://www.php.net/manual/en/class.finfo.php) *Requires fileinfo extension to be enabled. (PHP 5 >= 5.3.0, PHP 7, PHP 8, PECL fileinfo >= 0.1.0)*
--  Our signature sniffer (based on [this code](http://phil.lavin.me.uk/2011/12/php-accurately-detecting-the-type-of-a-file/)) *Works on all platforms (PHP 4, PHP 5, PHP 7, PHP 8). Only detects png, gif, jpeg and webp*
+-  [This signature sniffer](https://github.com/rosell-dk/image-mime-type-sniffer) *Does not require any extensions. Recognizes popular image formats only*
 -  [`exif_imagetype`](https://www.php.net/manual/en/function.exif-imagetype.php) *Requires that PHP is compiled with exif (PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)*
 -  [`mime_content_type`](https://www.php.net/manual/en/function.mime-content-type.php) *Requires fileinfo. (PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)*
 
