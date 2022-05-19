@@ -43,6 +43,8 @@ class MimeMap
     public static function extToMime($fileExtension)
     {
 
+        $fileExtension = strtolower($fileExtension);
+        
         // Trivial image mime types
         if (in_array($fileExtension, ['apng', 'avif', 'bmp', 'gif', 'jpeg', 'png', 'tiff', 'webp'])) {
             return 'image/' . $fileExtension;

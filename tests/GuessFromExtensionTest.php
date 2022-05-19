@@ -47,6 +47,10 @@ class GuessFromExtensionTest extends TestCase
         doTest('webp-test.webp', 'image/webp');
         doTest('button.svg', 'image/svg+xml');
 
+        // upper-case and mixed case
+        doTest('UPPERCASE.JPEG', 'image/jpeg');
+        doTest('MixedCase.JpEg', 'image/jpeg');
+
         // special cases
         doTest('jpg-with space.jpg', 'image/jpeg');
         doTest('png-with-jpeg-extension.jpg', 'image/jpeg');
