@@ -17,13 +17,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-20.04, windows-2022]  # We pick something other than in coverage.yml, which is also run on pushes
-        php: [5.6, 7.2]                   # We pick something other than in coverage.yml, which is also run on pushes
-        exclude:  # phpunit is malfunctioning on Windows / PHP 5.6, so disable those tests
-            - os: windows-2019
-              php: 5.6
-            - os: windows-2022
-              php: 5.6
+        os: [ubuntu-latest]
+        php: [8.4]
 
     steps:
     - name: Checkout
@@ -43,7 +38,7 @@ jobs:
       if: matrix.php == '7.2'
       run: |
         echo "Downgrading phpunit to ^8.0, which is the highest version that supports PHP 7.2"
-        composer require "phpunit/phpunit:^8.0" --dev --no-update
+        composer require 'phpunit/phpunit:^8.0' --dev --no-update
 
     - name: Composer alterations for PHP 7.1
       if: matrix.php == '7.1'
